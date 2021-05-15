@@ -1,0 +1,3 @@
+﻿Este projeto vai represetnar o antigo projeto "Modelo",
+nele ficaram reperesntadas todas as classes para implementar tabelas 
+no banco de dados
