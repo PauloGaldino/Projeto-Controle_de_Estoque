@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 namespace Domain.Commands.Persons.Customers
 {
     public class CustomerCommandHandler : CommandHandler,
-        IRequestHandler<RegisterNewCustomerCommand, ValidationResult >,
-        IRequestHandler<UpdateCustomerCommand, ValidationResult >,
-        IRequestHandler<RemoveCustomerCommand, ValidationResult >
+        IRequestHandler<RegisterNewCustomerCommand, ValidationResult>,
+        IRequestHandler<UpdateCustomerCommand, ValidationResult>,
+        IRequestHandler<RemoveCustomerCommand, ValidationResult>
     {
         //Injeção de dependencia
         private readonly ICustomerRepository _customerRepository;
@@ -24,10 +24,10 @@ namespace Domain.Commands.Persons.Customers
             _customerRepository = customerRepository;
         }
 
-         //Métodos 
+        //Métodos 
         public async Task<ValidationResult> Handle(RegisterNewCustomerCommand message, CancellationToken cancellationToken)
         {
-           
+
             if (!message.IsValid()) return message.ValidationResult;
 
             var customer = new Customer(Guid.NewGuid(), message.Name, message.Email, message.BirthDate);

@@ -1,5 +1,5 @@
-﻿using System;
-using NetDevPack.Domain;
+﻿using NetDevPack.Domain;
+using System;
 
 namespace Domain.Models.Persons.Customers
 {
@@ -15,7 +15,7 @@ namespace Domain.Models.Persons.Customers
         }
 
         //Construtor vazio para o Ef
-        protected Customer(){}
+        protected Customer() { }
 
         //Propriedades
         public string Name { get; private set; }

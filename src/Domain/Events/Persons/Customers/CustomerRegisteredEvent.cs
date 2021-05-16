@@ -6,7 +6,7 @@ namespace Domain.Events.Persons.Customers
     public class CustomerRegisteredEvent : Event
     {
         //Construtor
-        public CustomerRegisteredEvent(Guid  id, string name, string email, DateTime birthDate)
+        public CustomerRegisteredEvent(Guid id, string name, string email, DateTime birthDate)
         {
             Id = id;
             Name = name;

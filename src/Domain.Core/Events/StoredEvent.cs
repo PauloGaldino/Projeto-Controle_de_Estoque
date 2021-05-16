@@ -5,6 +5,8 @@ namespace Domain.Core.Events
 {
     public class StoredEvent : Event
     {
+        public Guid aggregateId;
+
         //Contrutor parametrizado
         public StoredEvent(Event theEvent, string data, string user)
         {
@@ -16,7 +18,7 @@ namespace Domain.Core.Events
         }
 
         //Construtor vazio para o EF
-        protected StoredEvent() {}
+        protected StoredEvent() { }
 
         //Métodos 
         public Guid Id { get; private set; }

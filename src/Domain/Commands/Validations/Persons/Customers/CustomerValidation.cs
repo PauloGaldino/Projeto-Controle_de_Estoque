@@ -4,7 +4,7 @@ using System;
 
 namespace Domain.Commands.Validations.Persons.Customers
 {
-    public abstract class CustomerValidation<T>: AbstractValidator<T> where T : CustomerCommand
+    public abstract class CustomerValidation<T> : AbstractValidator<T> where T : CustomerCommand
     {
 
         protected void ValidateName()
