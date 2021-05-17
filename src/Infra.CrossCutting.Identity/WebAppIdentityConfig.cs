@@ -12,10 +12,11 @@ namespace Infra.CrossCutting.Identity
             // Default EF Context for Identity (inside of the NetDevPack.Identity)
             services.AddIdentityEntityFrameworkContextConfiguration(options =>
                SqlServerDbContextOptionsExtensions.UseSqlServer(options, configuration.GetConnectionString("DefaultConnection"),
-                   b => b.MigrationsAssembly("Equinox.Infra.CrossCutting.Identity")));
+                   b => b.MigrationsAssembly("Infra.CrossCutting.Identity")));
 
             // Default Identity configuration from NetDevPack.Identity
             services.AddIdentityConfiguration();
+
         }
     }
 }
