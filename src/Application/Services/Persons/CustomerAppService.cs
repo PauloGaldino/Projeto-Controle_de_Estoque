@@ -5,7 +5,7 @@ using AutoMapper;
 using Domain.Commands.Persons.Customers;
 using Domain.Interfaces.Persons.Customers;
 using FluentValidation.Results;
-using Infra.Data.Repositories.Evnetsouercings.Interfaces;
+using Infra.Data.Repositories.Eventsouercings.Interfaces;
 using NetDevPack.Mediator;
 using System;
 using System.Collections.Generic;

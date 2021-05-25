@@ -9,7 +9,7 @@ namespace Infra.Data.Mappings
         public void Configure(EntityTypeBuilder<StoredEvent> builder)
         {
             builder.Property(c => c.Timestamp)
-               .HasColumnName("CreationDate");
+                .HasColumnName("CreationDate");
 
             builder.Property(c => c.MessageType)
                 .HasColumnName("Action")

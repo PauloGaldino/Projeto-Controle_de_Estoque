@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using NetDevPack.Identity.Authorization;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Service.Api.Controllers
@@ -35,16 +34,16 @@ namespace Service.Api.Controllers
             return await _customerAppService.GetById(id);
         }
 
-        [CustomAuthorize("Customers","Write")]
+        [CustomAuthorize("Customers", "Write")]
         [HttpPost("customer-management")]
-        public async Task<IActionResult> Post([FromBody]CustomerViewModel customerViewModel)
+        public async Task<IActionResult> Post([FromBody] CustomerViewModel customerViewModel)
         {
             return !ModelState.IsValid ? CustomResponse(ModelState) : CustomResponse(await _customerAppService.Register(customerViewModel));
         }
 
-        [CustomAuthorize("Custumers","Write")]
-        [HttpGet("sustumer-management")]
-        public async Task<IActionResult> Put([FromBody]CustomerViewModel customerViewModel)
+        [CustomAuthorize("Customers", "Write")]
+        [HttpPut("customer-management")]
+        public async Task<IActionResult> Put([FromBody] CustomerViewModel customerViewModel)
         {
             return !ModelState.IsValid ? CustomResponse(ModelState) : CustomResponse(await _customerAppService.Update(customerViewModel));
         }
@@ -55,7 +54,6 @@ namespace Service.Api.Controllers
         {
             return CustomResponse(await _customerAppService.Remove(id));
         }
-       
 
         [AllowAnonymous]
         [HttpGet("customer-management/history/{id:guid}")]

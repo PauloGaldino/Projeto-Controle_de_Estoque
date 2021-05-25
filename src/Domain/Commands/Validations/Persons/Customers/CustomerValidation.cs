@@ -2,11 +2,11 @@
 using FluentValidation;
 using System;
 
+
 namespace Domain.Commands.Validations.Persons.Customers
 {
     public abstract class CustomerValidation<T> : AbstractValidator<T> where T : CustomerCommand
     {
-
         protected void ValidateName()
         {
             RuleFor(c => c.Name)
@@ -34,8 +34,6 @@ namespace Domain.Commands.Validations.Persons.Customers
             RuleFor(c => c.Id)
                 .NotEqual(Guid.Empty);
         }
-
-
 
         protected static bool HaveMinimumAge(DateTime birthDate)
         {

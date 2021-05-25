@@ -6,17 +6,17 @@ using System;
 
 namespace Service.Api.Configurations
 {
-    public static class DataBaseConfig
+    public static class DatabaseConfig
     {
-        public static void AddDataBaseConfiguration(this IServiceCollection services, IConfiguration configuration)
+        public static void AddDatabaseConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
             services.AddDbContext<StoreControlContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnetion")));
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDbContext<EventStoreSqlContext>(options =>
-              options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
         }
     }
 }

@@ -8,6 +8,5 @@ namespace Domain.Commands.Validations.Persons.Customers
         {
             ValidateId();
         }
-
     }
 }

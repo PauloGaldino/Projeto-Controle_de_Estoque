@@ -6,9 +6,10 @@ using System.Text.Json;
 
 namespace Application.EventSourcingNormalize.Perspns
 {
-    public class CustomerHistory
+    public static class CustomerHistory
     {
         public static IList<CustomerHistoryData> HistoryData { get; set; }
+
         public static IList<CustomerHistoryData> ToJavaScriptCustomerHistory(IList<StoredEvent> storedEvents)
         {
             HistoryData = new List<CustomerHistoryData>();

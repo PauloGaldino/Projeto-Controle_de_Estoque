@@ -11,26 +11,19 @@ using System.Threading.Tasks;
 
 namespace Infra.Data.Contexts
 {
-    public class StoreControlContext : DbContext, IUnitOfWork
+    public sealed class StoreControlContext : DbContext, IUnitOfWork
     {
-        //Injeção de dependencia
         private readonly IMediatorHandler _mediatorHandler;
 
-        //Construtor parametrizado
-        public StoreControlContext(DbContextOptions<StoreControlContext> options, IMediatorHandler mediatorHandler)
-            : base(options)
+        public StoreControlContext(DbContextOptions<StoreControlContext> options, IMediatorHandler mediatorHandler) : base(options)
         {
             _mediatorHandler = mediatorHandler;
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             ChangeTracker.AutoDetectChangesEnabled = false;
-
         }
 
-        //Atributos
         public DbSet<Customer> Customers { get; set; }
 
-
-        //Métodos
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Ignore<ValidationResult>();
@@ -62,6 +55,7 @@ namespace Infra.Data.Contexts
             return success;
         }
     }
+
     public static class MediatorExtension
     {
         public static async Task PublishDomainEvents<T>(this IMediatorHandler mediator, T ctx) where T : DbContext

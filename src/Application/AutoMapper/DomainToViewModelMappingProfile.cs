@@ -10,6 +10,5 @@ namespace Application.AutoMapper
         {
             CreateMap<Customer, CustomerViewModel>();
         }
-
     }
 }

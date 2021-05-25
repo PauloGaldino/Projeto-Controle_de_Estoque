@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Service.Api.Controllers
 {
-    [Route("api/COntroller")]
+
+    [Route("api/[controller]")]
     [ApiController]
     public class AccountController : ApiController
     {
@@ -18,8 +19,7 @@ namespace Service.Api.Controllers
         public AccountController(
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
-            IOptions<AppJwtSettings> appJwtSettings
-            )
+            IOptions<AppJwtSettings> appJwtSettings)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -39,7 +39,6 @@ namespace Service.Api.Controllers
                 EmailConfirmed = true
             };
 
-
             var result = await _userManager.CreateAsync(user, registerUser.Password);
 
             if (result.Succeeded)
@@ -57,9 +56,9 @@ namespace Service.Api.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<ActionResult> Login(LoginUser loginUser)
+        public async Task<IActionResult> Login(LoginUser loginUser)
         {
-            if (ModelState.IsValid) return CustomResponse(ModelState);
+            if (!ModelState.IsValid) return CustomResponse(ModelState);
 
             var result = await _signInManager.PasswordSignInAsync(loginUser.Email, loginUser.Password, false, true);
 
@@ -71,7 +70,7 @@ namespace Service.Api.Controllers
 
             if (result.IsLockedOut)
             {
-                AddError("This user is temporally blocked");
+                AddError("This user is temporarily blocked");
                 return CustomResponse();
             }
 
@@ -82,14 +81,13 @@ namespace Service.Api.Controllers
         private string GetFullJwt(string email)
         {
             return new JwtBuilder()
-               .WithUserManager(_userManager)
-               .WithJwtSettings(_appJwtSettings)
-               .WithEmail(email)
-               .WithJwtClaims()
-               .WithUserClaims()
-               .WithUserRoles()
-               .BuildToken();
+                .WithUserManager(_userManager)
+                .WithJwtSettings(_appJwtSettings)
+                .WithEmail(email)
+                .WithJwtClaims()
+                .WithUserClaims()
+                .WithUserRoles()
+                .BuildToken();
         }
-
     }
 }

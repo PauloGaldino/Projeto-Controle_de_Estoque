@@ -5,7 +5,6 @@ namespace Domain.Models.Persons.Customers
 {
     public class Customer : Entity, IAggregateRoot
     {
-        //COnstrutor parametrizado
         public Customer(Guid id, string name, string email, DateTime birthDate)
         {
             Id = id;
@@ -14,12 +13,13 @@ namespace Domain.Models.Persons.Customers
             BirthDate = birthDate;
         }
 
-        //Construtor vazio para o Ef
+        // Empty constructor for EF
         protected Customer() { }
 
-        //Propriedades
         public string Name { get; private set; }
+
         public string Email { get; private set; }
+
         public DateTime BirthDate { get; private set; }
     }
 }

@@ -5,20 +5,20 @@ namespace Domain.Events.Persons.Customers
 {
     public class CustomerRegisteredEvent : Event
     {
-        //Construtor
         public CustomerRegisteredEvent(Guid id, string name, string email, DateTime birthDate)
         {
             Id = id;
             Name = name;
             Email = email;
             BirthDate = birthDate;
+            AggregateId = id;
         }
-
-        //Propriedades
         public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public DateTime BirthDate { get; set; }
 
+        public string Name { get; private set; }
+
+        public string Email { get; private set; }
+
+        public DateTime BirthDate { get; private set; }
     }
 }

@@ -5,17 +5,13 @@ using NetDevPack.Identity;
 using NetDevPack.Identity.Jwt;
 
 
-
 namespace Infra.CrossCutting.Identity
 {
     public static class ApiIdentityConfig
     {
-
-
         public static void AddApiIdentityConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
-        
-             // Default EF Context for Identity (inside of the NetDevPack.Identity)
+            // Default EF Context for Identity (inside of the NetDevPack.Identity)
             services.AddIdentityEntityFrameworkContextConfiguration(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
                     b => b.MigrationsAssembly("Infra.CrossCutting.Identity")));

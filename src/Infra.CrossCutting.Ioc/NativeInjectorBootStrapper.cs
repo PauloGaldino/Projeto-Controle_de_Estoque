@@ -8,12 +8,13 @@ using FluentValidation.Results;
 using Infra.CrossCutting.Bus;
 using Infra.Data.Contexts;
 using Infra.Data.EventSourcings;
-using Infra.Data.Repositories.Evnetsouercings;
-using Infra.Data.Repositories.Evnetsouercings.Interfaces;
+using Infra.Data.Repositories.Eventsouercings;
+using Infra.Data.Repositories.Eventsouercings.Interfaces;
 using Infra.Data.Repositories.Persons;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using NetDevPack.Mediator;
+
 
 namespace Infra.CrossCutting.Ioc
 {
@@ -42,9 +43,10 @@ namespace Infra.CrossCutting.Ioc
             services.AddScoped<StoreControlContext>();
 
             // Infra - Data EventSourcing
-            services.AddScoped<IEventStoreRepository, EventStoreSQLRepository>();
+            services.AddScoped<IEventStoreRepository, EventStoreSqlRepository>();
             services.AddScoped<IEventStore, SqlEventStore>();
             services.AddScoped<EventStoreSqlContext>();
         }
     }
 }
+

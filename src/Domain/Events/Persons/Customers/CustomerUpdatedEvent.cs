@@ -1,12 +1,11 @@
 ﻿using NetDevPack.Messaging;
 using System;
 
+
 namespace Domain.Events.Persons.Customers
 {
-
     public class CustomerUpdatedEvent : Event
     {
-        //Construtor parametrizado
         public CustomerUpdatedEvent(Guid id, string name, string email, DateTime birthDate)
         {
             Id = id;
@@ -15,8 +14,6 @@ namespace Domain.Events.Persons.Customers
             BirthDate = birthDate;
             AggregateId = id;
         }
-
-        //Proriedades
         public Guid Id { get; set; }
 
         public string Name { get; private set; }

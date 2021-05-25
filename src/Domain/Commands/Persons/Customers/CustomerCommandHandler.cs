@@ -15,23 +15,18 @@ namespace Domain.Commands.Persons.Customers
         IRequestHandler<UpdateCustomerCommand, ValidationResult>,
         IRequestHandler<RemoveCustomerCommand, ValidationResult>
     {
-        //Injeção de dependencia
         private readonly ICustomerRepository _customerRepository;
 
-        //Construtor parametrizado
         public CustomerCommandHandler(ICustomerRepository customerRepository)
         {
             _customerRepository = customerRepository;
         }
 
-        //Métodos 
         public async Task<ValidationResult> Handle(RegisterNewCustomerCommand message, CancellationToken cancellationToken)
         {
-
             if (!message.IsValid()) return message.ValidationResult;
 
             var customer = new Customer(Guid.NewGuid(), message.Name, message.Email, message.BirthDate);
-
 
             if (await _customerRepository.GetByEmail(customer.Email) != null)
             {
@@ -44,12 +39,10 @@ namespace Domain.Commands.Persons.Customers
             _customerRepository.Add(customer);
 
             return await Commit(_customerRepository.UnitOfWork);
-
         }
 
         public async Task<ValidationResult> Handle(UpdateCustomerCommand message, CancellationToken cancellationToken)
         {
-
             if (!message.IsValid()) return message.ValidationResult;
 
             var customer = new Customer(message.Id, message.Name, message.Email, message.BirthDate);
@@ -73,7 +66,6 @@ namespace Domain.Commands.Persons.Customers
 
         public async Task<ValidationResult> Handle(RemoveCustomerCommand message, CancellationToken cancellationToken)
         {
-
             if (!message.IsValid()) return message.ValidationResult;
 
             var customer = await _customerRepository.GetById(message.Id);

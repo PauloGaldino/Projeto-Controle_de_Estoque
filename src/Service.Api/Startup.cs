@@ -1,5 +1,4 @@
 using Infra.CrossCutting.Identity;
-using Service.Api.Configurations;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NetDevPack.Identity;
 using NetDevPack.Identity.User;
+using Service.Api.Configurations;
 
 namespace Service.Api
 {
@@ -17,29 +17,27 @@ namespace Service.Api
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsetting.json", true, true)
-                .AddJsonFile("appsetting.{env.EnvironmentName}.json", true);
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true);
 
             if (env.IsDevelopment())
             {
                 builder.AddUserSecrets<Startup>();
             }
+
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
-
         }
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             // WebAPI Config
             services.AddControllers();
 
             // Setting DBContexts
-            services.AddDataBaseConfiguration(Configuration);
+            services.AddDatabaseConfiguration(Configuration);
 
             // ASP.NET Identity Settings & JWT
             services.AddApiIdentityConfiguration(Configuration);
@@ -61,7 +59,6 @@ namespace Service.Api
             services.AddDependencyInjectionConfiguration();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -73,12 +70,22 @@ namespace Service.Api
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseCors(c =>
+            {
+                c.AllowAnyHeader();
+                c.AllowAnyMethod();
+                c.AllowAnyOrigin();
+            });
+
+            // NetDevPack.Identity dependency
+            app.UseAuthConfiguration();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+            app.UseSwaggerSetup();
         }
     }
 }

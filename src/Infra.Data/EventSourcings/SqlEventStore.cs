@@ -1,5 +1,5 @@
 ﻿using Domain.Core.Events;
-using Infra.Data.Repositories.Evnetsouercings.Interfaces;
+using Infra.Data.Repositories.Eventsouercings.Interfaces;
 using NetDevPack.Identity.User;
 using NetDevPack.Messaging;
 using Newtonsoft.Json;
@@ -16,6 +16,7 @@ namespace Infra.Data.EventSourcings
             _eventStoreRepository = eventStoreRepository;
             _user = user;
         }
+
         public void Save<T>(T theEvent) where T : Event
         {
 

@@ -1,4 +1,5 @@
-﻿namespace Application.EventSourcingNormalize.Perspns
+﻿
+namespace Application.EventSourcingNormalize.Perspns
 {
     public class CustomerHistoryData
     {

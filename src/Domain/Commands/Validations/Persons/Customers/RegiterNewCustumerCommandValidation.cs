@@ -2,9 +2,9 @@
 
 namespace Domain.Commands.Validations.Persons.Customers
 {
-    public class RegiterNewCustumerCommandValidation : CustomerValidation<RegisterNewCustomerCommand>
+    public class RegisterNewCustomerCommandValidation : CustomerValidation<RegisterNewCustomerCommand>
     {
-        public RegiterNewCustumerCommandValidation()
+        public RegisterNewCustomerCommandValidation()
         {
             ValidateName();
             ValidateBirthDate();

@@ -3,6 +3,7 @@ using System;
 
 namespace Domain.Commands.Persons.Customers
 {
+
     public class RemoveCustomerCommand : CustomerCommand
     {
         public RemoveCustomerCommand(Guid id)

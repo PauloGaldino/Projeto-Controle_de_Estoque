@@ -5,7 +5,6 @@ namespace Domain.Commands.Persons.Customers
 {
     public class RegisterNewCustomerCommand : CustomerCommand
     {
-        //Construtor
         public RegisterNewCustomerCommand(string name, string email, DateTime birthDate)
         {
             Name = name;
@@ -13,10 +12,9 @@ namespace Domain.Commands.Persons.Customers
             BirthDate = birthDate;
         }
 
-        //Método
         public override bool IsValid()
         {
-            ValidationResult = new RegiterNewCustumerCommandValidation().Validate(this);
+            ValidationResult = new RegisterNewCustomerCommandValidation().Validate(this);
             return ValidationResult.IsValid;
         }
     }
